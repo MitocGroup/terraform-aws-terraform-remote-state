@@ -19,22 +19,7 @@ variable "types" {
   }
 }
 
-variable "backend" {
-  type    = string
-  default = "s3"
-}
-
-variable "max_keys" {
-  type    = number
-  default = 1
-}
-
 variable "default_tfstate" {
   type    = string
   default = "terraform.tfstate"
-}
-
-variable "failover_tfstate" {
-  type    = string
-  default = "terraform/terraform.empty.tfstate"
 }

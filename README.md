@@ -2,7 +2,18 @@
 The `terraform-remote-state` terraform module is designed to avoid errors
 associated with missing `terraform.tfstate` file in S3 remote backend.
 
-No more `Unable to find remote state`! Enough is enough.
+**No more `Unable to find remote state`. Enough is enough!**
+
+Please use it responsibly. Under the hood, this module checks first
+if `terraform.tfstate` file is stored in S3 and if it doesn't find it,
+new file is generated from the tfstate template and expected outputs.
+Therefore, before using this module, make sure that your use case actually
+fits into the above described model.
+
+Required software:
+* [Terraform Binary](https://www.terraform.io/downloads.html)
+* [AWS CLI](https://aws.amazon.com/cli/)
+* [JSON Processor CLI](https://stedolan.github.io/jq/)
 
 ## Before
 ```tf
