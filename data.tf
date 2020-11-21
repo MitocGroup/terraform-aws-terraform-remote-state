@@ -1,12 +1,12 @@
 data "terraform_remote_state" "current" {
-  count      = var.count
+  count      = var.counting
   backend    = var.backend
   config     = var.config
   depends_on = [data.external.current]
 }
 
 data "external" "current" {
-  count   = var.count * (local.current_tfstate == var.config["key"] ? 0 : 1)
+  count   = var.counting * (local.current_tfstate == var.config["key"] ? 0 : 1)
   program = ["/bin/sh", "${abspath(path.module)}/tfstate.sh", var.config["bucket"], var.config["key"], jsonencode(data.template_file.current.rendered)]
 }
 

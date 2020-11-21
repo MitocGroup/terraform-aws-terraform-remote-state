@@ -34,10 +34,10 @@ No stored state was found for the given workspace in the given backend.
 ## After
 ```tf
 module "example" {
-  source  = "MitocGroup/terraform-remote-state/aws"
-  version = "0.0.1"
-  count   = var.is_sandbox ? 1 : 0  ## optional
-  config  = {
+  source   = "MitocGroup/terraform-remote-state/aws"
+  version  = "0.0.1"
+  counting = var.is_sandbox ? 1 : 0  ## optional
+  config   = {
     bucket   = "[YOUR_S3_BUCKET_HERE]"
     key      = "[YOUR_S3_PATH_TO_TFSTATE_HERE]"
     region   = "[YOUR_AWS_REGION_HERE]"   ## optional
