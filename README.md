@@ -42,11 +42,16 @@ Error: Unable to find remote state
 No stored state was found for the given workspace in the given backend.
 ```
 
+NOTE: Additional keys for `config` argument can be found here:
+1. [Credentials and Shared Configuration](https://www.terraform.io/docs/backends/types/s3.html#credentials-and-shared-configuration)
+2. [Assume Role Configuration](https://www.terraform.io/docs/backends/types/s3.html#assume-role-configuration)
+3. [S3 State Storage Configuration](https://www.terraform.io/docs/backends/types/s3.html#s3-state-storage)
+
 ## After
 ```tf
 module "example" {
   source   = "MitocGroup/terraform-remote-state/aws"
-  version  = "0.0.5"
+  version  = "0.0.6"
   counting = var.is_sandbox ? 1 : 0  ## optional
   config   = {
     bucket   = "[YOUR_S3_BUCKET_HERE]"
