@@ -1,6 +1,6 @@
 data "terraform_remote_state" "current" {
   count      = var.counting
-  backend    = var.backend
+  backend    = "s3"
   config     = var.config
   depends_on = [data.external.current]
 }
@@ -12,7 +12,7 @@ data "external" "current" {
 
 data "aws_s3_bucket_objects" "current" {
   max_keys = 1
-  bucket   = "s3"
+  bucket   = var.config["bucket"]
   prefix   = replace(var.config["key"], var.default_tfstate, "")
 }
 

@@ -1,17 +1,22 @@
 variable "counting" {
-  type = number
+  type        = number
+  description = "This variable is used to define count; since `coint` is reserved keyword, please use `counting` as part of this module"
 }
 
 variable "config" {
-  type = map(string)
+  type        = map(string)
+  description = "This variable is used to define the config values for s3 powered `data.terraform_remote_state`"
 }
 
 variable "outputs" {
-  type = map(string)
+  type        = map(string)
+  description = "This variable is used to define the outputs' expected keys and corresponding types"
 }
 
 variable "types" {
-  type    = map(string)
+  type        = map(string)
+  description = "This variable is used to define the outputs' expected json structure"
+
   default = {
     "string"       = "{\"value\":\"\",\"type\":\"string\"}"
     "list(string)" = "{\"value\":[\"\"],\"type\":[\"list\",\"string\"]}"
@@ -20,6 +25,8 @@ variable "types" {
 }
 
 variable "default_tfstate" {
-  type    = string
+  type        = string
+  description = "This variable is used to default tfstate filename (e.g. `terraform.tfstate`)"
+
   default = "terraform.tfstate"
 }

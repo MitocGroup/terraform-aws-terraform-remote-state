@@ -6,7 +6,7 @@ associated with missing `terraform.tfstate` file in S3 remote backend.
 
 Please use it responsibly. Under the hood, this module checks first
 if `terraform.tfstate` file is stored in S3 and if it doesn't find it,
-new file is generated from the tfstate template and expected outputs.
+new file is generated from the tfstate template based on expected outputs.
 Therefore, before using this module, make sure that your use case actually
 fits into the above described model.
 

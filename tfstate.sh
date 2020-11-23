@@ -33,7 +33,7 @@ if [ ! -z "${5}" ]; then
 fi
 
 # save tfstate as json and upload to s3
-echo $1 > tfstate.${UNIQUE_ID}.txt
+echo ${1} > tfstate.${UNIQUE_ID}.txt
 jq -rc . tfstate.${UNIQUE_ID}.txt > tfstate.${UNIQUE_ID}.json
 aws s3 cp --quiet --region ${4} tfstate.${UNIQUE_ID}.json s3://${2}/${3}
 
