@@ -7,7 +7,7 @@ data "terraform_remote_state" "current" {
 
 data "external" "current" {
   count   = var.counting * (local.current_tfstate == var.config["key"] ? 0 : 1)
-  program = ["/bin/sh", "${abspath(path.module)}/tfstate.sh", jsonencode(data.template_file.current.rendered), var.config["bucket"], var.config["key"], contains(var.config, "region") ? var.config["region"] : "us-east-1", contains(var.config, "role_arn") ? var.config["role_arn"] : ""]
+  program = ["/bin/sh", "${abspath(path.module)}/tfstate.sh", jsonencode(data.template_file.current.rendered), var.config["bucket"], var.config["key"], lookup(var.config, "region", "us-east-1"), lookup(var.config, "role_arn", "")]
 }
 
 data "aws_s3_bucket_objects" "current" {
