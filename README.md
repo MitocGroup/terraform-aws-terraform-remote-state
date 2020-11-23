@@ -46,7 +46,7 @@ No stored state was found for the given workspace in the given backend.
 ```tf
 module "example" {
   source   = "MitocGroup/terraform-remote-state/aws"
-  version  = "0.0.4"
+  version  = "0.0.5"
   counting = var.is_sandbox ? 1 : 0  ## optional
   config   = {
     bucket   = "[YOUR_S3_BUCKET_HERE]"

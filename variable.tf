@@ -1,8 +1,3 @@
-variable "counting" {
-  type        = number
-  description = "This variable is used to define count; since `coint` is reserved keyword, please use `counting` as part of this module"
-}
-
 variable "config" {
   type        = map(string)
   description = "This variable is used to define the config values for s3 powered `data.terraform_remote_state`"
@@ -11,6 +6,13 @@ variable "config" {
 variable "outputs" {
   type        = map(string)
   description = "This variable is used to define the outputs' expected keys and corresponding types"
+}
+
+variable "counting" {
+  type        = number
+  description = "This variable is used to define count; since `count` is reserved keyword, please use `counting` as part of this module"
+
+  default = 1
 }
 
 variable "types" {
