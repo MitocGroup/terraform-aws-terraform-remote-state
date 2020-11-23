@@ -26,6 +26,13 @@ variable "types" {
   }
 }
 
+variable "workspace" {
+  type        = string
+  description = "This variable is used to define the terraform workspace, if the backend supports workspaces"
+
+  default = "default"
+}
+
 variable "default_tfstate" {
   type        = string
   description = "This variable is used to default tfstate filename (e.g. `terraform.tfstate`)"

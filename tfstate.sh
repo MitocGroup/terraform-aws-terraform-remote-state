@@ -11,13 +11,14 @@ jq --version > /dev/null 2>&1 || { jq -n '{"message":"jq is missing"}'; exit 1; 
 UNIQUE_ID=$(uuidgen)
 
 # validate inline parameters
-if [ -z "${1}" ]; then jq -n '{"message":"template tfstate is missing"}'; exit 1; fi
-if [ -z "${2}" ]; then jq -n '{"message":"s3 bucket is missing"}'; exit 1; fi
-if [ -z "${3}" ]; then jq -n '{"message":"s3 key is missing"}'; exit 1; fi
-if [ -z "${4}" ]; then jq -n '{"message":"aws region is missing"}'; exit 1; fi
+if [ -z "${1}" ] || [ "${1}" == "N/A" ]; then jq -n '{"message":"template tfstate is missing"}'; exit 1; fi
+if [ -z "${2}" ] || [ "${2}" == "N/A" ]; then jq -n '{"message":"s3 bucket is missing"}'; exit 1; fi
+if [ -z "${3}" ] || [ "${3}" == "N/A" ]; then jq -n '{"message":"s3 key is missing"}'; exit 1; fi
+if [ -z "${4}" ] || [ "${4}" == "N/A" ]; then jq -n '{"message":"aws region is missing"}'; exit 1; fi
+if [ -z "${5}" ]; then jq -n '{"message":"aws role arn is missing"}'; exit 1; fi
 
 # assume aws role if exists
-if [ ! -z "${5}" ]; then
+if [ "${5}" != "N/A" ]; then
   ASSUME_ROLE="$(aws sts assume-role --role-arn ${5} --role-session-name awscli-${UNIQUE_ID} | jq '.Credentials')"
   ACCESS_KEY="$(echo ${ASSUME_ROLE} | jq '.AccessKeyId')"
   SECRET_KEY="$(echo ${ASSUME_ROLE} | jq '.SecretAccessKey')"
@@ -38,7 +39,7 @@ jq -rc . tfstate.${UNIQUE_ID}.txt > tfstate.${UNIQUE_ID}.json
 aws s3 cp --quiet --region ${4} tfstate.${UNIQUE_ID}.json s3://${2}/${3}
 
 # clean up and allow s3 to sync up (sleep 1 second)
-rm tfstate.${UNIQUE_ID}.txt tfstate.${UNIQUE_ID}.json
+rm tfstate.${UNIQUE_ID}.*
 sleep 1
 
 # return successful execution
